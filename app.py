@@ -15,6 +15,8 @@ def get_db():
 
 def create_tables():
 
+    print("CREATE TABLES STARTED")
+
     con = get_db()
     cur = con.cursor()
 
@@ -55,6 +57,8 @@ def create_tables():
     con.commit()
     cur.close()
     con.close()
+
+    print("CREATE TABLES COMPLETED")
 
 
 # ---------------- LOGIN ----------------

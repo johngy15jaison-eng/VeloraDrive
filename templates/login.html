@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TEST LOGIN PAGE</title>
+<title>Velora Drive | Login</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
@@ -13,6 +13,18 @@
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin: 10px 0 15px;
+    text-align: center;
+    font-weight: 500;
+}
+
+</style>
 
 </head>
 
@@ -35,6 +47,7 @@ Velora <span>Drive</span>
 
 </nav>
 
+
 <div class="container">
 
 <div class="left">
@@ -42,30 +55,47 @@ Velora <span>Drive</span>
 <h1>Welcome Back</h1>
 
 {% if error %}
-<div class="error">
+<div class="error-message">
     {{ error }}
 </div>
 {% endif %}
-
-<form action="/login" method="post">
 
 <p>
 Sign in to continue your premium vehicle rental experience.
 </p>
 
-<form action="/login" method="post">
+
+<form action="/login" method="POST">
 
 <div class="input-group">
+
 <label>Email Address</label>
+
 <i class="fa-solid fa-envelope"></i>
-<input type="email" name="email" placeholder="Enter your email" required>
+
+<input
+type="email"
+name="email"
+placeholder="Enter your email"
+required>
+
 </div>
 
+
 <div class="input-group">
+
 <label>Password</label>
+
 <i class="fa-solid fa-lock"></i>
-<input type="password" name="password" placeholder="Enter your password" required>
+
+<input
+type="password"
+name="password"
+placeholder="Enter your password"
+required>
+
 </div>
+
 
 <div class="options">
 
@@ -78,20 +108,32 @@ Remember Me
 
 </div>
 
-<button class="login-btn">Login</button>
+
+<button type="submit" class="login-btn">
+Login
+</button>
 
 </form>
 
+
 <div class="signup">
+
 Don't have an account?
-<a href="/register">Create Account</a>
+
+<a href="/register">
+Create Account
+</a>
+
 </div>
 
 </div>
+
 
 <div class="right">
 
-<img src="{{ url_for('static', filename='images/car.jpg') }}" alt="Luxury Cars">
+<img
+src="{{ url_for('static', filename='images/car.jpg') }}"
+alt="Luxury Cars">
 
 </div>
 
