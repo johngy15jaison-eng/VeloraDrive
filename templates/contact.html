@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Contact</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/contact.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+
+Velora <span>Drive</span>
+
+</div>
+
+<ul>
+
+<li><a href="/home">Home</a></li>
+
+<li><a href="/vehicles">Vehicles</a></li>
+
+<li><a href="/my_bookings">Bookings</a></li>
+
+<li><a href="/contact" class="active">Contact</a></li>
+
+<li><a href="/">Logout</a></li>
+
+</ul>
+
+</nav>
+
+<section class="contact">
+
+<h1>Contact Us</h1>
+
+<p>We'd love to hear from you.</p>
+
+<div class="container">
+
+<div class="details">
+
+<h2>Velora Drive</h2>
+
+<p>📍 Kochi, Kerala, India</p>
+
+<p>📞 +91 9876543210</p>
+
+<p>✉ support@veloradrive.com</p>
+
+<p>🕒 Mon - Sun : 8:00 AM - 10:00 PM</p>
+
+</div>
+
+<div class="form-box">
+
+<form action="/send_message" method="POST">
+
+<input type="text"
+name="name"
+placeholder="Your Name"
+required>
+
+<input type="email"
+name="email"
+placeholder="Your Email"
+required>
+
+<input type="text"
+name="subject"
+placeholder="Subject"
+required>
+
+<textarea
+name="message"
+placeholder="Your Message"
+rows="6"
+required></textarea>
+
+<button type="submit">
+Send Message
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>
+
+© 2026 Velora Drive | Luxury Vehicle Rental
+
+</p>
+
+</footer>
+
+</body>
+
+</html>

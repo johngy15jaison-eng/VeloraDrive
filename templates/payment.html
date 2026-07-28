@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Secure Payment</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/payment.css') }}">
+
+</head>
+
+<body>
+
+<div class="payment-card">
+
+<div class="top">
+
+<h1>Velora Drive</h1>
+
+<p>Secure Payment Gateway</p>
+
+</div>
+
+<div class="booking">
+
+<div class="vehicle">
+
+<img src="{{ url_for('static', filename='images/' + image) }}">
+
+</div>
+
+<div class="info">
+
+<h2>{{ vehicle }}</h2>
+
+<p>Booking ID :
+<strong>VD2026001</strong></p>
+
+<p>Customer :
+<strong>{{ customer_name }}</strong></p>
+
+<p>Total Amount</p>
+
+<h1 class="price">₹ {{ amount }}</h1>
+
+</div>
+
+</div>
+
+<hr>
+
+<h2 class="method">
+
+Pay using UPI
+
+</h2>
+
+<div class="upi-box">
+
+<div class="qr">
+
+<img src="{{ url_for('static', filename='images/qr.png') }}">
+
+</div>
+
+<div class="upi-details">
+
+<h3>Scan QR Code</h3>
+
+<p>UPI ID</p>
+
+<h2>veloradrive@upi</h2>
+
+<div class="apps">
+
+<div>🟣 PhonePe</div>
+
+<div>🟢 Google Pay</div>
+
+<div>🔵 Paytm</div>
+
+<div>⚪ BHIM</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<div class="status">
+
+<h2 id="status">
+🟡 Waiting for Payment...
+</h2>
+
+<p>Scan the QR Code using any UPI App</p>
+
+<h1 id="timer">05:00</h1>
+
+<div class="loader"></div>
+
+<p class="small">
+Checking payment status...
+</p>
+
+</div>
+</div>
+
+<script>
+
+let seconds = 300;
+
+let timer = document.getElementById("timer");
+
+let status = document.getElementById("status");
+
+let interval = setInterval(function(){
+
+    let m = Math.floor(seconds/60);
+
+    let s = seconds%60;
+
+    timer.innerHTML =
+    String(m).padStart(2,'0')+
+    ":"+
+    String(s).padStart(2,'0');
+
+    seconds--;
+
+    if(seconds<0){
+
+        clearInterval(interval);
+
+        status.innerHTML="🔴 Payment Timeout";
+
+    }
+
+},1000);
+
+
+/* Demo payment after 8 seconds */
+
+setTimeout(function(){
+
+    status.innerHTML="🟢 Payment Successful";
+
+    document.querySelector(".loader").style.display="none";
+
+    document.querySelector(".small").innerHTML=
+    "Redirecting to Booking Confirmation...";
+
+    setTimeout(function(){
+
+        window.location.href="/booking_success";
+
+    },3000);
+
+},8000);
+
+</script>
+
+</body>
+
+</html>

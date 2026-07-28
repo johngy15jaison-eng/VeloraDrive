@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Vehicles</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/vehicle.css') }}">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+<div class="logo">
+
+Velora <span>Drive</span>
+
+</div>
+
+<ul>
+
+<li><a href="/home">Home</a></li>
+
+<li><a href="/vehicles" class="active">Vehicles</a></li>
+
+<li><a href="/my_bookings">Bookings</a></li>
+
+<li><a href="/contact">Contact</a></li>
+
+<li><a href="/">Logout</a></li>
+
+</ul>
+
+</nav>
+
+
+<!-- Heading -->
+
+<section class="heading">
+
+<h1>Our Premium Fleet</h1>
+
+<p>Select your perfect ride for every journey.</p>
+
+</section>
+
+
+<!-- ===================== CARS ====================== -->
+
+<section class="category">
+
+<h2> Cars</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/fortuner.jpg') }}">
+
+<h3>Toyota Fortuner</h3>
+
+<p>SUV</p>
+
+<h4>₹4500 / Day</h4>
+
+<a href="/booking?vehicle=Toyota Fortuner&image=fortuner.jpg" class="book-btn">Book Now</a>
+
+</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/creta.jpg') }}">
+
+<h3>Hyundai Creta</h3>
+
+<p>SUV</p>
+
+<h4>₹3500 / Day</h4>
+
+<a href="/booking?vehicle=Hyundai Creta&image=creta.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/city.jpg') }}">
+
+<h3>Honda City</h3>
+
+<p>Sedan</p>
+
+<h4>₹2800 / Day</h4>
+
+<a href="/booking?vehicle=Honda City&image=CITY1.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/verna.jpg') }}">
+
+<h3>Hyundai Verna</h3>
+
+<p>Sedan</p>
+
+<h4>₹3000 / Day</h4>
+
+<a href="/booking?vehicle=Hyundai Verna&image=verna.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/swift.jpg') }}">
+
+<h3>Maruti Swift</h3>
+
+<p>Hatchback</p>
+
+<h4>₹1800 / Day</h4>
+
+<a href="/booking?vehicle=Maruti Swift&image=swift.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/innova.jpg') }}">
+
+<h3>Toyota Innova</h3>
+
+<p>MUV</p>
+
+<h4>₹4200 / Day</h4>
+
+<a href="/booking?vehicle=Toyota Innova&image=INNOVA1.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/thar.jpg') }}">
+
+<h3>Mahindra Thar</h3>
+
+<p>Off Road</p>
+
+<h4>₹5000 / Day</h4>
+
+<a href="/booking?vehicle=Mahindra Thar&image=thar.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/bmw.jpg') }}">
+
+<h3>BMW 3 Series</h3>
+
+<p>Luxury Sedan</p>
+
+<h4>₹8500 / Day</h4>
+
+<a href="/booking?vehicle=BMW 3 Series&image=bmw.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================== BIKES ====================== -->
+
+<section class="category">
+
+<h2> Bikes</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/r15.jpg') }}">
+
+<h3>Yamaha R15</h3>
+
+<p>Sports Bike</p>
+
+<h4>₹1200 / Day</h4>
+
+<a href="/booking?vehicle=Yamaha R15&image=r15.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/duke.jpg') }}">
+
+<h3>KTM Duke</h3>
+
+<p>Sports Bike</p>
+
+<h4>₹1400 / Day</h4>
+
+<a href="/booking?vehicle=KTM Duke&image=duke.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/classic350.jpg') }}">
+
+<h3>Classic 350</h3>
+
+<p>Cruiser</p>
+
+<h4>₹1500 / Day</h4>
+
+<a href="/booking?vehicle=Royal Enfield Classic 350&image=classic350.jpg" class="book-btn">Book Now</a>
+
+
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/rtr160.jpg') }}">
+
+<h3>Apache RTR 160</h3>
+
+<p>Sports Bike</p>
+
+<h4>₹1100 / Day</h4>
+
+<a href="/booking?vehicle=RTR 160&image=rtr160.jpg" class="book-btn">Book Now</a>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ===================== SCOOTERS ====================== -->
+
+<section class="category">
+
+<h2> Scooters</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/activa6g.jpg') }}">
+
+<h3>Honda Activa 6G</h3>
+
+<p>Scooter</p>
+
+<h4>₹700 / Day</h4>
+
+<a href="/booking?vehicle=Honda Activa 6G&image=Honda-activa6G.jpg" class="book-btn">Book Now</a>
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/access125.jpg') }}">
+
+<h3>Suzuki Access 125</h3>
+
+<p>Scooter</p>
+
+<h4>₹750 / Day</h4>
+
+<a href="/booking?vehicle=Suzuki Access 125&image=access125.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/ntorq.jpg') }}">
+
+<h3>TVS Ntorq</h3>
+
+<p>Scooter</p>
+
+<h4>₹850 / Day</h4>
+
+<a href="/booking?vehicle=TVS Ntorq&image=ntorq.jpg" class="book-btn">Book Now</a>
+
+</div>
+
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/rayzr.jpg') }}">
+
+<h3>Yamaha RayZR</h3>
+
+<p>Scooter</p>
+
+<h4>₹800 / Day</h4>
+
+<a href="/booking?vehicle=Yamaha RayZR&image=rayzr.jpg" class="book-btn">Book Now</a>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+</body>
+
+</html>

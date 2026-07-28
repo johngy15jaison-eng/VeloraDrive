@@ -1,0 +1,408 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:
+    linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.65)),
+    url("../images/car.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    padding:30px;
+
+}
+
+/* Card */
+
+.payment-card{
+
+    width:850px;
+
+    background:rgba(255,255,255,.12);
+
+    backdrop-filter:blur(18px);
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    color:white;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.45);
+
+    animation:popup .8s ease;
+
+}
+
+/* Top */
+
+.top{
+
+    background:#0d1b2a;
+
+    padding:25px;
+
+    text-align:center;
+
+}
+
+.top h1{
+
+    color:#d4af37;
+
+    font-size:38px;
+
+}
+
+.top p{
+
+    color:#ddd;
+
+    margin-top:8px;
+
+}
+
+/* Booking Section */
+
+.booking{
+
+    display:flex;
+
+    gap:30px;
+
+    padding:35px;
+
+    align-items:center;
+
+}
+
+.vehicle img{
+
+    width:260px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.4);
+
+}
+
+.info{
+
+    flex:1;
+
+}
+
+.info h2{
+
+    font-size:34px;
+
+    margin-bottom:15px;
+
+}
+
+.info p{
+
+    margin:10px 0;
+
+    color:#eee;
+
+}
+
+.price{
+
+    color:#d4af37;
+
+    font-size:42px;
+
+    margin-top:15px;
+
+}
+
+/* Line */
+
+hr{
+
+    border:none;
+
+    border-top:1px solid rgba(255,255,255,.15);
+
+}
+
+/* Payment */
+
+.method{
+
+    padding:25px 35px;
+
+}
+
+.upi-box{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:40px;
+
+    padding:0 35px 35px;
+
+}
+
+.qr{
+
+    width:220px;
+    height:220px;
+
+    background:white;
+
+    border-radius:15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+}
+
+.qr img{
+
+    width:180px;
+
+}
+
+.upi-details{
+
+    flex:1;
+
+}
+
+.upi-details h2{
+
+    margin:15px 0;
+
+    color:#d4af37;
+
+}
+
+.apps{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+.apps div{
+
+    background:rgba(255,255,255,.08);
+
+    padding:15px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    transition:.3s;
+
+    cursor:pointer;
+
+}
+
+.apps div:hover{
+
+    background:#d4af37;
+
+    color:black;
+
+}
+
+/* Status */
+
+.status{
+
+    text-align:center;
+
+    padding:30px;
+
+}
+
+.status h2{
+
+    margin-bottom:15px;
+
+}
+
+#timer{
+
+    font-size:55px;
+
+    color:#d4af37;
+
+}
+
+/* Button */
+
+button{
+
+    width:calc(100% - 70px);
+
+    margin:0 35px 35px;
+
+    padding:18px;
+
+    border:none;
+
+    border-radius:40px;
+
+    background:#d4af37;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:white;
+
+    color:#0d1b2a;
+
+    transform:translateY(-4px);
+
+}
+
+/* Animation */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.payment-card{
+
+    width:100%;
+
+}
+
+.booking{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.vehicle img{
+
+    width:100%;
+
+    max-width:320px;
+
+}
+
+.upi-box{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.apps{
+
+    grid-template-columns:1fr;
+
+}
+
+button{
+
+    width:90%;
+
+    margin:25px auto;
+
+}
+
+#timer{
+
+    font-size:42px;
+
+}
+
+/* Loading Spinner */
+
+.loader{
+
+width:60px;
+height:60px;
+
+margin:30px auto;
+
+border:6px solid rgba(255,255,255,.25);
+
+border-top:6px solid #d4af37;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.small{
+
+color:#ddd;
+
+font-size:15px;
+
+margin-top:15px;
+
+}
+
+}

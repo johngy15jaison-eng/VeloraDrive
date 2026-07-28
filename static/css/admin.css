@@ -1,0 +1,185 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+    min-height:100vh;
+}
+
+/* NAVBAR */
+
+nav{
+    height:80px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 70px;
+    background:#1b1b1b;
+    border-bottom:1px solid #333;
+}
+
+.logo{
+    font-size:30px;
+    font-weight:700;
+    color:white;
+}
+
+.logo span{
+    color:#d4af37;
+}
+
+.logout{
+    text-decoration:none;
+    background:#d4af37;
+    color:#111;
+    padding:10px 25px;
+    border-radius:10px;
+    font-weight:600;
+}
+
+.logout:hover{
+    background:#f0ca4d;
+}
+
+/* MAIN */
+
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:50px auto;
+}
+
+h1{
+    text-align:center;
+    font-size:42px;
+    color:#d4af37;
+}
+
+.subtitle{
+    text-align:center;
+    color:#aaa;
+    margin-top:8px;
+    margin-bottom:45px;
+}
+
+/* DASHBOARD CARDS */
+
+.cards{
+    display:flex;
+    gap:25px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.card{
+    width:300px;
+    background:#1c1c1c;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:35px 20px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#d4af37;
+    box-shadow:0 10px 30px rgba(212,175,55,.15);
+}
+
+.icon{
+    font-size:45px;
+    margin-bottom:15px;
+}
+
+.card h2{
+    font-size:45px;
+    color:#d4af37;
+}
+
+.card p{
+    color:#ddd;
+    font-size:17px;
+    margin-top:5px;
+}
+
+/* MANAGEMENT */
+
+.section{
+    margin-top:55px;
+    background:#1b1b1b;
+    border-radius:18px;
+    padding:35px;
+    text-align:center;
+    border:1px solid #333;
+}
+
+.section h2{
+    color:white;
+    margin-bottom:25px;
+}
+
+.buttons{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.buttons a{
+    text-decoration:none;
+    background:#d4af37;
+    color:#111;
+    padding:13px 28px;
+    border-radius:10px;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.buttons a:hover{
+    background:#f0ca4d;
+    transform:translateY(-3px);
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    nav{
+        padding:0 20px;
+    }
+
+    .logo{
+        font-size:25px;
+    }
+
+    .logout{
+        padding:8px 16px;
+    }
+
+    h1{
+        font-size:32px;
+    }
+
+    .container{
+        width:92%;
+        margin-top:35px;
+    }
+
+    .card{
+        width:100%;
+    }
+
+    .section{
+        padding:25px 15px;
+    }
+
+    .buttons a{
+        width:100%;
+    }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Messages</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_messages.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+Velora <span>Drive</span>
+</div>
+
+<a href="/admin" class="back-btn">
+← Admin Dashboard
+</a>
+
+</nav>
+
+<div class="container">
+
+<h1>Contact Messages</h1>
+
+<p class="subtitle">
+Messages received from customers
+</p>
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Subject</th>
+<th>Message</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for message in messages %}
+
+<tr>
+
+<td>{{ message[0] }}</td>
+<td>{{ message[1] }}</td>
+<td>{{ message[2] }}</td>
+<td>{{ message[3] }}</td>
+<td class="message">{{ message[4] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

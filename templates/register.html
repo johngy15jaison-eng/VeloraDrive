@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Register</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- LEFT IMAGE SECTION -->
+
+<div class="left">
+
+<h1>
+Velora <span>Drive</span>
+</h1>
+
+<h2>
+Create Your Account
+</h2>
+
+<p>
+Join our premium vehicle rental service and experience luxury journeys with comfort and safety.
+</p>
+
+
+<div class="features">
+
+<p>✔ Luxury Vehicles</p>
+
+<p>✔ Easy Booking</p>
+
+<p>✔ Secure Payment</p>
+
+<p>✔ 24/7 Support</p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- RIGHT REGISTER BOX -->
+
+
+<div class="right">
+
+
+<div class="box">
+
+
+<h2>
+Register
+</h2>
+
+
+<form action="/save" method="post">
+
+<label>Full Name</label>
+<input type="text" name="name" required>
+
+<label>Email Address</label>
+<input type="email" name="email" required>
+
+<label>Password</label>
+<input type="password" name="password" required>
+
+<button type="submit">
+    Create Account
+</button>
+
+</form>
+
+
+
+<p class="login">
+
+Already have an account?
+
+<a href="/">
+Login
+</a>
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+</div>
+
+
+</body>
+
+</html>

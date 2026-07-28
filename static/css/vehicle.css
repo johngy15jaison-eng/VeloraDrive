@@ -1,0 +1,274 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    background:
+    linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.70)),
+    url("../images/car.jpg");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+
+    color:white;
+}
+
+/* Navigation */
+
+nav{
+
+    width:100%;
+    height:80px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 60px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(12px);
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo{
+
+    font-size:34px;
+    font-weight:700;
+    color:white;
+
+}
+
+.logo span{
+
+    color:#d4af37;
+
+}
+
+nav ul{
+
+    display:flex;
+    list-style:none;
+
+}
+
+nav ul li{
+
+    margin-left:35px;
+
+}
+
+nav ul li a{
+
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:.3s;
+
+}
+
+nav ul li a:hover,
+nav ul li a.active{
+
+    color:#d4af37;
+
+}
+
+/* Heading */
+
+.heading{
+
+    text-align:center;
+    padding:50px 20px;
+
+}
+
+.heading h1{
+
+    font-size:48px;
+    margin-bottom:10px;
+
+}
+
+.heading p{
+
+    font-size:18px;
+    color:#ddd;
+
+}
+
+/* Vehicle Category */
+
+.category{
+
+    width:95%;
+    margin:auto;
+    margin-bottom:60px;
+
+}
+
+.category h2{
+
+    color:#d4af37;
+    font-size:34px;
+    margin-bottom:25px;
+
+}
+
+/* Cards */
+
+.cards{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:30px;
+
+}
+
+.card{
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(12px);
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+    transition:.4s;
+
+    padding-bottom:25px;
+
+}
+
+.card:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:0 25px 45px rgba(0,0,0,.5);
+
+}
+
+.card img{
+
+    width:100%;
+    height:220px;
+    object-fit:cover;
+
+}
+
+.card h3{
+
+    margin-top:18px;
+    font-size:24px;
+
+}
+
+.card p{
+
+    color:#ddd;
+    margin-top:8px;
+    font-size:16px;
+
+}
+
+.card h4{
+
+    color:#d4af37;
+    margin:15px 0;
+    font-size:22px;
+
+}
+
+/* Book Now Button */
+
+.book-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:12px 35px;
+
+    background:#d4af37;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+    font-weight:600;
+
+    border-radius:30px;
+
+    transition:.3s;
+
+    box-shadow:0 5px 15px rgba(212,175,55,.4);
+
+}
+
+.book-btn:hover{
+
+    background:white;
+
+    color:#0d1b2a;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.3);
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+nav{
+
+    flex-direction:column;
+    height:auto;
+    padding:20px;
+
+}
+
+nav ul{
+
+    margin-top:15px;
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+
+nav ul li{
+
+    margin:10px;
+
+}
+
+.heading h1{
+
+    font-size:36px;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+}

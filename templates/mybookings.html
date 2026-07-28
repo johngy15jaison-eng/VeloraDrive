@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Bookings</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/mybookings.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>My Bookings</h1>
+
+{% if bookings %}
+
+{% for booking in bookings %}
+
+<div class="booking-card">
+
+<div class="header">
+
+<h2>{{ booking[4] }}</h2>
+
+<span>#{{ booking[0] }}</span>
+
+</div>
+
+<div class="details">
+
+<p>👤 {{ booking[1] }}</p>
+
+<p>📧 {{ booking[2] }}</p>
+
+<p>📞 {{ booking[3] }}</p>
+
+<p>📅 {{ booking[5] }} → {{ booking[6] }}</p>
+
+<p>📍 {{ booking[7] }} → {{ booking[8] }}</p>
+
+<p>💳 {{ booking[9] }}</p>
+
+</div>
+
+<div class="status">
+
+<span>Confirmed</span>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<div class="empty">
+
+<h2>No Bookings Found</h2>
+
+<p>Book your dream vehicle now.</p>
+
+<a href="/vehicles">Explore Vehicles</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Users</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/admin_users.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+<div class="logo">
+Velora <span>Drive</span>
+</div>
+
+<a href="/admin" class="back-btn">
+← Admin Dashboard
+</a>
+
+</nav>
+
+
+<div class="container">
+
+<h1>Registered Users</h1>
+
+<p class="subtitle">
+All users registered with Velora Drive
+</p>
+
+
+<div class="table-box">
+
+<table>
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Email</th>
+<th>Password</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for user in users %}
+
+<tr>
+
+<td>{{ user[0] }}</td>
+
+<td>{{ user[1] }}</td>
+
+<td>{{ user[2] }}</td>
+
+<td>{{ user[3] }}</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>

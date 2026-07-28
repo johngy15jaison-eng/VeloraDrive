@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Booking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Velora Drive | Booking</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/booking.css') }}">
+
+<style>
+body{
+    background:
+    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
+    url("{{ url_for('static', filename='images/' + image) }}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
+
+</head>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="box">
+
+<h1>Vehicle Booking</h1>
+
+<form action="/confirm_booking" method="POST">
+
+<label>Customer Name</label>
+<input type="text" name="customer_name" placeholder="Enter your full name" required>
+
+<label>Email</label>
+<input type="email" name="email" placeholder="Enter your email" required>
+
+<label>Phone Number</label>
+<input type="tel" name="phone" placeholder="Enter mobile number" required>
+
+<label>Vehicle</label>
+
+<input
+type="text"
+name="vehicle"
+value="{{ vehicle }}"
+readonly>
+
+
+
+<label>Pickup Date</label>
+<input type="date" name="pickup_date" required>
+
+<label>Return Date</label>
+<input type="date" name="return_date" required>
+
+<label>Pickup Location</label>
+<input type="text" name="pickup_location" placeholder="Enter pickup location" required>
+
+<label>Return Location</label>
+<input type="text" name="return_location" placeholder="Enter return location" required>
+
+<label>Payment Method</label>
+
+<select name="payment" required>
+
+<option>Cash</option>
+<option>UPI</option>
+<option>Credit Card</option>
+<option>Debit Card</option>
+
+</select>
+
+<button type="submit">Confirm Booking</button>
+
+</form>
+
+</div>
+
+</div>
+
+</body>
+
+</html>
