@@ -1,131 +1,157 @@
 from flask import Flask, render_template, request, redirect
-import sqlite3
+import psycopg2
+import os
 
 app = Flask(__name__)
 
-# Create table
-con = sqlite3.connect("users.db")
-cur = con.cursor()
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS users(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-)
-""")
+# ---------------- DATABASE CONNECTION ----------------
 
-con.commit()
-con.close()
+def get_db():
+    return psycopg2.connect(os.environ.get("DATABASE_URL"))
 
-# Create bookings table
 
-con = sqlite3.connect("users.db")
-cur = con.cursor()
+# ---------------- CREATE TABLES ----------------
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS bookings(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    customer_name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    phone TEXT NOT NULL,
-    vehicle TEXT NOT NULL,
-    pickup_date TEXT NOT NULL,
-    return_date TEXT NOT NULL,
-    pickup_location TEXT NOT NULL,
-    return_location TEXT NOT NULL,
-    payment TEXT NOT NULL
-)
-""")
+def create_tables():
 
-con.commit()
-con.close()
+    con = get_db()
+    cur = con.cursor()
 
-# Create Contact Messages Table
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users(
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT UNIQUE NOT NULL,
+        password TEXT NOT NULL
+    )
+    """)
 
-con = sqlite3.connect("users.db")
-cur = con.cursor()
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS bookings(
+        id SERIAL PRIMARY KEY,
+        customer_name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        phone TEXT NOT NULL,
+        vehicle TEXT NOT NULL,
+        pickup_date TEXT NOT NULL,
+        return_date TEXT NOT NULL,
+        pickup_location TEXT NOT NULL,
+        return_location TEXT NOT NULL,
+        payment TEXT NOT NULL
+    )
+    """)
 
-cur.execute("""
-CREATE TABLE IF NOT EXISTS contact_messages(
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL,
-    subject TEXT NOT NULL,
-    message TEXT NOT NULL
-)
-""")
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS contact_messages(
+        id SERIAL PRIMARY KEY,
+        name TEXT NOT NULL,
+        email TEXT NOT NULL,
+        subject TEXT NOT NULL,
+        message TEXT NOT NULL
+    )
+    """)
 
-con.commit()
-con.close()
+    con.commit()
+    cur.close()
+    con.close()
 
+
+# ---------------- LOGIN ----------------
 
 @app.route("/")
 def login():
     return render_template("login.html")
 
 
+# ---------------- REGISTER PAGE ----------------
+
 @app.route("/register")
 def register():
     return render_template("register.html")
 
 
+# ---------------- SAVE USER ----------------
+
 @app.route("/save", methods=["POST"])
 def save():
-
-    print("SAVE ROUTE CALLED")
 
     name = request.form["name"]
     email = request.form["email"]
     password = request.form["password"]
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
-    cur.execute(
-        "INSERT INTO users(name,email,password) VALUES(?,?,?)",
-        (name, email, password)
-    )
+    try:
+        cur.execute(
+            "INSERT INTO users(name,email,password) VALUES(%s,%s,%s)",
+            (name, email, password)
+        )
 
-    con.commit()
+        con.commit()
+
+    except psycopg2.errors.UniqueViolation:
+        con.rollback()
+        cur.close()
+        con.close()
+
+        return render_template(
+            "register.html",
+            error="Email already registered!"
+        )
+
+    cur.close()
     con.close()
 
     return redirect("/")
+
+
+# ---------------- LOGIN CHECK ----------------
+
 @app.route("/login", methods=["POST"])
 def check_login():
 
     email = request.form["email"]
     password = request.form["password"]
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
     cur.execute(
-        "SELECT * FROM users WHERE email=? AND password=?",
+        "SELECT * FROM users WHERE email=%s AND password=%s",
         (email, password)
     )
 
     user = cur.fetchone()
 
+    cur.close()
     con.close()
 
     if user:
         return redirect("/home")
-    else:
-        return render_template(
-            "login.html",
-            error="Invalid email or password!"
-        )
 
+    return render_template(
+        "login.html",
+        error="Invalid email or password!"
+    )
+
+
+# ---------------- HOME ----------------
 
 @app.route("/home")
 def home():
     return render_template("home.html")
 
+
+# ---------------- VEHICLES ----------------
+
 @app.route("/vehicles")
 def vehicles():
     return render_template("vehicles.html")
+
+
+# ---------------- BOOKING PAGE ----------------
 
 @app.route("/booking")
 def booking():
@@ -140,6 +166,7 @@ def booking():
     )
 
 
+# ---------------- CONFIRM BOOKING ----------------
 
 @app.route("/confirm_booking", methods=["POST"])
 def confirm_booking():
@@ -154,7 +181,7 @@ def confirm_booking():
     return_location = request.form["return_location"]
     payment = request.form["payment"]
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
     cur.execute("""
@@ -162,7 +189,7 @@ def confirm_booking():
     (customer_name, email, phone, vehicle,
      pickup_date, return_date,
      pickup_location, return_location, payment)
-    VALUES(?,?,?,?,?,?,?,?,?)
+    VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s)
     """,
     (
         customer_name,
@@ -177,19 +204,22 @@ def confirm_booking():
     ))
 
     con.commit()
+
+    cur.close()
     con.close()
 
     return redirect(
-    f"/booking_success?"
-    f"customer_name={customer_name}"
-    f"&vehicle={vehicle}"
-    f"&pickup_date={pickup_date}"
-    f"&return_date={return_date}"
-    f"&payment={payment}"
-)
+        f"/booking_success?"
+        f"customer_name={customer_name}"
+        f"&vehicle={vehicle}"
+        f"&pickup_date={pickup_date}"
+        f"&return_date={return_date}"
+        f"&payment={payment}"
+    )
 
 
-    
+# ---------------- BOOKING SUCCESS ----------------
+
 @app.route("/booking_success")
 def booking_success():
 
@@ -208,23 +238,35 @@ def booking_success():
         payment=payment
     )
 
+
+# ---------------- MY BOOKINGS ----------------
+
 @app.route("/my_bookings")
 def my_bookings():
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM bookings")
+    cur.execute("SELECT * FROM bookings ORDER BY id DESC")
     bookings = cur.fetchall()
 
+    cur.close()
     con.close()
 
-    return render_template("mybookings.html", bookings=bookings)
+    return render_template(
+        "mybookings.html",
+        bookings=bookings
+    )
+
+
+# ---------------- CONTACT ----------------
 
 @app.route("/contact")
 def contact():
     return render_template("contact.html")
 
+
+# ---------------- SEND MESSAGE ----------------
 
 @app.route("/send_message", methods=["POST"])
 def send_message():
@@ -234,30 +276,37 @@ def send_message():
     subject = request.form["subject"]
     message = request.form["message"]
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
     cur.execute("""
-    INSERT INTO contact_messages(name,email,subject,message)
-    VALUES(?,?,?,?)
+    INSERT INTO contact_messages
+    (name,email,subject,message)
+    VALUES(%s,%s,%s,%s)
     """,
     (name, email, subject, message))
 
     con.commit()
+
+    cur.close()
     con.close()
 
     return redirect("/message_success")
 
+
+# ---------------- MESSAGE SUCCESS ----------------
 
 @app.route("/message_success")
 def message_success():
     return render_template("success.html")
 
 
+# ---------------- ADMIN ----------------
+
 @app.route("/admin")
 def admin():
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
     cur.execute("SELECT COUNT(*) FROM users")
@@ -269,6 +318,7 @@ def admin():
     cur.execute("SELECT COUNT(*) FROM contact_messages")
     total_messages = cur.fetchone()[0]
 
+    cur.close()
     con.close()
 
     return render_template(
@@ -278,15 +328,19 @@ def admin():
         total_messages=total_messages
     )
 
+
+# ---------------- ADMIN USERS ----------------
+
 @app.route("/admin/users")
 def admin_users():
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM users")
+    cur.execute("SELECT * FROM users ORDER BY id DESC")
     users = cur.fetchall()
 
+    cur.close()
     con.close()
 
     return render_template(
@@ -294,15 +348,19 @@ def admin_users():
         users=users
     )
 
+
+# ---------------- ADMIN BOOKINGS ----------------
+
 @app.route("/admin/bookings")
 def admin_bookings():
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM bookings")
+    cur.execute("SELECT * FROM bookings ORDER BY id DESC")
     bookings = cur.fetchall()
 
+    cur.close()
     con.close()
 
     return render_template(
@@ -311,15 +369,18 @@ def admin_bookings():
     )
 
 
+# ---------------- ADMIN MESSAGES ----------------
+
 @app.route("/admin/messages")
 def admin_messages():
 
-    con = sqlite3.connect("users.db")
+    con = get_db()
     cur = con.cursor()
 
-    cur.execute("SELECT * FROM contact_messages")
+    cur.execute("SELECT * FROM contact_messages ORDER BY id DESC")
     messages = cur.fetchall()
 
+    cur.close()
     con.close()
 
     return render_template(
@@ -328,5 +389,8 @@ def admin_messages():
     )
 
 
+# ---------------- START APP ----------------
+
 if __name__ == "__main__":
+    create_tables()
     app.run()
